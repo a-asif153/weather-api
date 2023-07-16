@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask("Website")
+app = Flask(__name__)
 
 @app.route("/")
 def home():
@@ -8,8 +8,11 @@ def home():
 
 @app.route("/api/v1/<station>/<date>")
 def about(station, date):
-    temperature = 23 #hard coding the value 23 just to test
-    return str(temperature)
+    temperature = 23
+    return {"station": station,
+            "date": date,
+            "temperature": temperature}
 
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
